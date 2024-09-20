@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一週間の献立プランナー</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #menu {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>一週間の献立プランナー</h1>
+    <h3>食材については、複数の食材の指定が可能です。ＣＴＲＬキーを押しながら、複数選択できます。</h3>
+    <select id="ingredients" multiple size="12">
+        <option value="rice">米</option>
+        <option value="chicken">鶏肉</option>
+        <option value="beef">牛肉</option>
+        <option value="pork">豚肉</option>
+        <option value="fish">魚</option>
+        <option value="egg">卵</option>
+        <option value="tofu">豆腐</option>
+        <option value="carrot">人参</option>
+        <option value="onion">玉ねぎ</option>
+        <option value="potato">じゃがいも</option>
+        <option value="tomato">トマト</option>
+        <option value="lettuce">レタス</option>
+        <option value="cucumber">きゅうり</option>
+        <option value="cabbage">キャベツ</option>
+        <option value="mushroom">きのこ</option>
+        <!-- 新しい食材を追加 -->
+        <option value="spinach">ほうれん草</option>
+        <option value="eggplant">ナス</option>
+        <option value="zucchini">ズッキーニ</option>
+        <option value="pepper">ピーマン</option>
+        <option value="shrimp">エビ</option>
+        <option value="cheese">チーズ</option>
+        <option value="bread">パン</option>
+        <option value="pasta">パスタ</option>
+        <option value="yogurt">ヨーグルト</option>
+    </select>
+    <button onclick="generateMenu()">献立を考案★クリックをする毎にメニューが表示されます。★</button>
+    <div id="menu"></div>
+
+    <script>
+        function generateMenu() {
+            const ingredients = Array.from(document.getElementById('ingredients').selectedOptions).map(option => option.value);
+            const days = ['月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日'];
+            const meals = {
+                rice: ['チャーハン', '牛丼', 'カレーライス', '親子丼', 'オムライス'],
+                chicken: ['唐揚げ', 'チキン南蛮', '照り焼きチキン', '鶏肉の野菜炒め', 'チキンカツ'],
+                beef: ['ビーフシチュー', 'ハンバーグ', '牛肉のすき焼き風', 'ビーフステーキ', '肉じゃが'],
+                pork: ['豚の生姜焼き', 'とんかつ', '酢豚', '豚キムチ', '豚しゃぶ'],
+                fish: ['鮭のムニエル', 'アジの南蛮漬け', 'さばの味噌煮', 'フィッシュアンドチップス', 'ブリの照り焼き'],
+                egg: ['オムレツ', '卵焼き', '茶碗蒸し', 'スクランブルエッグ', 'ゆで卵サラダ'],
+                tofu: ['麻婆豆腐', '冷奴', '豆腐ハンバーグ', '豆腐の味噌汁', '豆腐ステーキ'],
+                carrot: ['キャロットラペ', 'にんじんしりしり', 'キャロットスープ', '人参のグラッセ', 'ラぺ'],
+                onion: ['オニオンスープ', 'オニオンリング', 'フレンチオニオングラタンスープ', 'オニオンサラダ', '玉ねぎの酢漬け'],
+                potato: ['ポテトサラダ', 'フライドポテト', 'じゃがバター', 'ポテトグラタン', 'ジャーマンポテト'],
+                tomato: ['トマトサラダ', 'カプレーゼ', 'ガスパチョ', 'トマト煮込み', 'ラタトゥイユ'],
+                lettuce: ['グリーンサラダ', 'レタス巻き', 'シーザーサラダ', 'レタスチャーハン', 'BLTサンドイッチ'],
+                cucumber: ['きゅうりの浅漬け', 'ギリシャ風サラダ', 'きゅうりのツナ和え', 'たたききゅうり', 'スティック野菜'],
+                cabbage: ['コールスロー', 'ロールキャベツ', '野菜炒め', 'キャベツの千切り', '焼きそば'],
+                mushroom: ['きのこの炊き込みご飯', 'きのこのバター炒め', 'きのこのホイル焼き', 'きのこのスープ', 'きのこのアヒージョ'],
+                spinach: ['ほうれん草の胡麻和え', 'ほうれん草のソテー', 'ほうれん草カレー', 'ほうれん草とベーコンの炒め物', 'ほうれん草のサラダ'],
+                eggplant: ['ナスの味噌炒め', 'ナスのグラタン', '焼きナス', 'ナスとトマトのパスタ', 'ナスの煮びたし'],
+                zucchini: ['ズッキーニのピカタ', 'ズッキーニとトマトのグリル', 'ズッキーニサラダ', 'ズッキーニのラタトゥイユ', 'ズッキーニフリッター'],
+                pepper: ['ピーマンの肉詰め', 'ピーマンサラダ', 'ピーマンのきんぴら', 'ピーマンのソテー', 'カラフルピーマン炒め'],
+                shrimp: ['エビチリ', 'エビのマリネ', 'エビフライ', 'ガーリックシュリンプ', 'エビグラタン'],
+                cheese: ['チーズオムレツ', 'チーズトースト', 'カプレーゼ', 'チーズフォンデュ', 'チーズリゾット'],
+                bread: ['フレンチトースト', 'サンドイッチ', 'ガーリックブレッド', 'クルトンサラダ', 'パンプディング'],
+                pasta: ['スパゲッティボロネーゼ', 'カルボナーラ', 'ペペロンチーノ', 'ラザニア', 'マカロニグラタン'],
+                yogurt: ['ヨーグルトパフェ', 'ラッシー', 'ヨーグルトドレッシングのサラダ', 'ヨーグルトケーキ', 'ヨーグルトディップ']
+            };
+
+            let menu = '';
+            days.forEach(day => {
+                const availableMeals = ingredients.flatMap(ing => meals[ing] || []);
+                const meal1 = availableMeals[Math.floor(Math.random() * availableMeals.length)];
+                const meal2 = availableMeals[Math.floor(Math.random() * availableMeals.length)];
+                menu += `<p><strong>${day}:</strong> ${meal1 || '選択された食材では献立を考案できませんでした。'} と ${meal2 || '選択された食材では献立を考案できませんでした。'}</p>`;
+            });
+
+            document.getElementById('menu').innerHTML = menu;
+        }
+    </script>
+</body>
+</html>
